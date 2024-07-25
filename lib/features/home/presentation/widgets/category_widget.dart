@@ -23,14 +23,14 @@ class CategoryWidget extends StatelessWidget {
             return const Center(
               child: Text('Failed to load categories'),
             );
-          } else if (cubit.allCategories!.isEmpty) {
+          } else if (cubit.allCategories.isEmpty) {
             return const Center(
               child: Text('No categories available'),
             );
           } else {
             return ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: cubit.allCategories!.length,
+              itemCount: cubit.allCategories.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(5),
@@ -41,7 +41,7 @@ class CategoryWidget extends StatelessWidget {
                         child: Opacity(
                           opacity: 0.8,
                           child: Image.network(
-                            cubit.allCategories![index].image,
+                            cubit.allCategories[index].image,
                             fit: BoxFit.cover,
                             height: 100,
                             width: 100,
@@ -53,7 +53,7 @@ class CategoryWidget extends StatelessWidget {
                             horizontal: 10, vertical: 10),
                         child: Center(
                           child: Text(
-                            cubit.allCategories![index].name,
+                            cubit.allCategories[index].name,
                             style: getBodyStyle(
                                 color: AppColors.white,
                                 fontsize: 15,

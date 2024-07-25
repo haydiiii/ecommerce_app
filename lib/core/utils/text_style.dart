@@ -16,6 +16,7 @@ TextStyle getTitleStyle({
 TextStyle getBodyStyle(
     {Color? color, FontWeight? fontWeight, double? fontsize}) {
   return TextStyle(
+    
     fontSize: fontsize ?? 16,
     fontWeight: fontWeight ?? FontWeight.normal,
     color: color ?? AppColors.black,
@@ -23,8 +24,13 @@ TextStyle getBodyStyle(
 }
 
 TextStyle getSmallStyle(
-    {Color? color, FontWeight? fontWeight, double? fontsize}) {
+  TextDecoration? decoration, {
+  Color? color,
+  FontWeight? fontWeight,
+  double? fontsize,
+}) {
   return TextStyle(
+    decoration: decoration ?? TextDecoration.lineThrough,
     fontSize: fontsize ?? 14,
     fontWeight: fontWeight ?? FontWeight.normal,
     color: color ?? AppColors.greyColor,

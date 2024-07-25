@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 class User {
   final int id;
   final String firstName;
@@ -69,5 +71,5 @@ void main() {
   };
 
   User user = User.fromJson(jsonData);
-  print('User: ${user.firstName} ${user.lastName}, Email: ${user.email}');
+  log('User: ${user.firstName} ${user.lastName}, Email: ${user.email}');
 }

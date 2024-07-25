@@ -3,7 +3,7 @@ import 'package:ecommerce_app/features/category/presentation/view/category_view.
 import 'package:ecommerce_app/features/home/presentation/view/home_view.dart';
 import 'package:ecommerce_app/features/products/presentation/view/products_view.dart';
 import 'package:ecommerce_app/features/profile/presentation/view/profile_view.dart';
-import 'package:ecommerce_app/features/store/presentation/view/store_view.dart';
+import 'package:ecommerce_app/features/cart/presentation/view/store_view.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -18,7 +18,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   final List<Widget> screens = [
     const HomeView(),
-    const ProductView(),
+    ProductView(
+    ),
     const CategoryView(),
     const StoreView(),
     const ProfileView(),

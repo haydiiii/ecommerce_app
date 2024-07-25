@@ -8,8 +8,9 @@ class CustomTxtFField extends StatefulWidget {
     required this.prefixicon,
     this.controller,
     this.suffixicon,
-    this.obscuretext = false, // Default to false for regular text fields
-    this.onTapSuffixIcon, this.validator,
+    this.obscuretext = false,
+    this.onTapSuffixIcon,
+    this.validator,
   });
 
   final String text;
@@ -17,15 +18,14 @@ class CustomTxtFField extends StatefulWidget {
   final IconData prefixicon;
   final bool obscuretext;
   final VoidCallback? onTapSuffixIcon;
-  final TextEditingController? controller; 
-  final String? Function(String?)? validator ; // Add the controller property
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
 
   @override
-  // ignore: library_private_types_in_public_api
-  _CustomTxtFFieldState createState() => _CustomTxtFFieldState();
+  CustomTxtFFieldState createState() => CustomTxtFFieldState();
 }
 
-class _CustomTxtFFieldState extends State<CustomTxtFField> {
+class CustomTxtFFieldState extends State<CustomTxtFField> {
   bool obscureText = true;
 
   @override
@@ -40,8 +40,9 @@ class _CustomTxtFFieldState extends State<CustomTxtFField> {
       width: 400,
       height: 52,
       child: TextFormField(
-        controller: widget.controller, // Use the controller
+        controller: widget.controller,
         obscureText: obscureText,
+        validator: widget.validator,
         decoration: InputDecoration(
           prefixIcon: Icon(
             widget.prefixicon,

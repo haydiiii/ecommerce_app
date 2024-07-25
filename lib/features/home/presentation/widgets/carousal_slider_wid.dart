@@ -26,19 +26,19 @@ class CarouselSliderWid extends StatelessWidget {
             return const Center(
               child: Text('Failed to load carousels'),
             );
-          } else if (cubit.sliders!.isEmpty) {
+          } else if (cubit.sliders.isEmpty) {
             return const Center(
               child: Text('No carousels available'),
             );
           } else {
             return CarouselSlider.builder(
-              itemCount: cubit.sliders!.length,
+              itemCount: cubit.sliders.length,
               itemBuilder:
                   (BuildContext context, int itemIndex, int pageViewIndex) {
                 return ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
-                    cubit.sliders![itemIndex].image,
+                    cubit.sliders[itemIndex].image,
                     fit: BoxFit.cover,
                     width: MediaQuery.of(context).size.width,
                   ),

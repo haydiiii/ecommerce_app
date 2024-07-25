@@ -98,6 +98,7 @@ class _LoginViewState extends State<LoginView> {
                                 Text(
                                   'Good to see you back!',
                                   style: getSmallStyle(
+                                    TextDecoration.none,
                                     color: AppColors.black,
                                     fontsize: 19,
                                     fontWeight: FontWeight.w300,
@@ -146,6 +147,7 @@ class _LoginViewState extends State<LoginView> {
                             const Gap(10),
                             CustomElvButton(
                               onPressed: () {
+                                //   print('token: ${cubit.}');
                                 if (formKey.currentState!.validate()) {
                                   cubit.login();
                                 }

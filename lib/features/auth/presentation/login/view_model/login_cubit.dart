@@ -15,19 +15,36 @@ class LoginCubit extends Cubit<LoginStates> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
 
-  login() {
+  login() async {
+    // print('enterrrrrrrrrrrrrrrrrrrrrrrrr');
     emit(LoginLoadingState());
-    DioHelper.postData(url: EndPoints.login, data: {
-      "email": emailController.text,
+    await DioHelper.postData(url: EndPoints.login, data: {
+      "email": emailController.text
+      //"admin@gmail.com"
+      ,
       "password": passwordController.text
+
+      // "112233"
     }).then((value) {
-      Token.cacheBearerToken(token: value.data['data']['token']);
-      CashHelper.cacheData('image', value.data['data']['image']);
-      CashHelper.cacheData('email', value.data['data']['email']);
-      CashHelper.cacheData('first_name', value.data['data']['first_name']);
-      log(value.data['data']['token']);
-      emit(LoginSuccessState());
+      // print('sucesssssssssssssrrrrrrrrrrrrrrrrrr');
+
+      // Check if the value contains the data
+      if (value.data != null && value.data['data'] != null) {
+        // Store the token
+        Token.cacheBearerToken(token: value.data["data"]["token"]);
+        CashHelper.cacheData("image", value.data["data"]["image"]);
+        CashHelper.cacheData("email", value.data["data"]["email"]);
+        CashHelper.cacheData("fierst_name", value.data["data"]["first_name"]);
+        log(value.data['data']['token']);
+        emit(LoginSuccessState());
+      } else {
+        //  print('enterrrrrrrrrrrrrrrrrrrrrrrrr');
+
+        emit(LoginErrorsState("Invalid response format"));
+      }
     }).catchError((onError) {
+      //  print('faileeeeeeeeeeeeeeeedrrrrrr');
+
       log(onError.toString());
       emit(LoginErrorsState(onError.toString()));
     });

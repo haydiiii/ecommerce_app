@@ -1,8 +1,7 @@
 import 'dart:developer';
 import 'package:ecommerce_app/core/services/dio_helper/dio_helper.dart';
 import 'package:ecommerce_app/core/services/dio_helper/end_points.dart';
-import 'package:ecommerce_app/features/home/presentation/models/carousal_model.dart';
-import 'package:ecommerce_app/features/home/presentation/models/category_model.dart';
+import 'package:ecommerce_app/features/home/presentation/models/home_model.dart';
 import 'package:ecommerce_app/features/home/presentation/view_model/home_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,25 +10,31 @@ class HomeCubit extends Cubit<HomeStates> {
 
   static HomeCubit get(context) => BlocProvider.of(context);
 
-  List<Category>? allCategories = [];
-  List<Carousel>? sliders = [];
+  List<Categories> allCategories = [];
+  List<NewProd> newProd = [];
+  List<Carusels> sliders = [];
+  List<TopProd> topProd = [];
+  List<HotProd> hotProd = [];
+  List<BestSellingProd> bestSellingProd = [];
 
   Future<void> getAllCategories() async {
     emit(HomeLoadingState());
     try {
       final response = await DioHelper.getData(url: EndPoints.home);
+      log(response.data.toString()); // Log the entire response
       if (response.statusCode == 200) {
-        allCategories = (response.data['data']['categories'] as List)
-            .map((category) => Category.fromJson(category))
-            .toList();
+        // Parse response data using HomeModel
+        final homeModel = HomeModel.fromJson(response.data);
+        allCategories = homeModel.data?.categories ?? [];
         emit(HomeSuccessState());
       } else {
         emit(HomeErrorState());
+        log("Error: ${response.statusCode} - ${response.statusMessage}");
         log(response.data.toString());
       }
     } catch (e) {
       emit(HomeErrorState());
-      log(e.toString());
+      log("Exception: $e");
     }
   }
 
@@ -37,18 +42,99 @@ class HomeCubit extends Cubit<HomeStates> {
     emit(HomeLoadingState());
     try {
       final response = await DioHelper.getData(url: EndPoints.home);
+      log(response.data.toString()); // Log the entire response
       if (response.statusCode == 200) {
-        sliders = (response.data['data']['carousels'] as List)
-            .map((carousel) => Carousel.fromJson(carousel))
-            .toList();
+        final homeModel = HomeModel.fromJson(response.data);
+        sliders = homeModel.data?.carusels ?? [];
         emit(HomeSuccessState());
       } else {
         emit(HomeErrorState());
+        log("Error: ${response.statusCode} - ${response.statusMessage}");
         log(response.data.toString());
       }
     } catch (e) {
       emit(HomeErrorState());
-      log(e.toString());
+      log("Exception: $e");
+    }
+  }
+
+  Future<void> getNewProducts() async {
+    emit(NewProductLoadingState());
+    try {
+      final response = await DioHelper.getData(url: EndPoints.home);
+      log(response.data.toString());
+      if (response.statusCode == 200) {
+        final homeModel = HomeModel.fromJson(response.data);
+        newProd = homeModel.data?.newProd ?? [];
+        emit(NewProductSuccessState());
+      } else {
+        emit(NewProductErrorState());
+        log("Error: ${response.statusCode} - ${response.statusMessage}");
+        log(response.data.toString());
+      }
+    } catch (e) {
+      emit(NewProductErrorState());
+      log("Exception: $e");
+    }
+  }
+
+  Future<void> getTopProducts() async {
+    emit(TopProductLoadingState());
+    try {
+      final response = await DioHelper.getData(url: EndPoints.home);
+      log(response.data.toString());
+      if (response.statusCode == 200) {
+        final homeModel = HomeModel.fromJson(response.data);
+        topProd = homeModel.data?.topProd ?? [];
+        emit(TopProductSuccessState());
+      } else {
+        emit(TopProductErrorState());
+        log("Error: ${response.statusCode} - ${response.statusMessage}");
+        log(response.data.toString());
+      }
+    } catch (e) {
+      emit(TopProductErrorState());
+      log("Exception: $e");
+    }
+  }
+
+  Future<void> getHproducts() async {
+    emit(HotProductLoadingState());
+    try {
+      final response = await DioHelper.getData(url: EndPoints.home);
+      log(response.data.toString());
+      if (response.statusCode == 200) {
+        final homeModel = HomeModel.fromJson(response.data);
+        hotProd = homeModel.data?.hotProd ?? [];
+        emit(HotProductSuccessState());
+      } else {
+        emit(HotProductErrorState());
+        log("Error: ${response.statusCode} - ${response.statusMessage}");
+        log(response.data.toString());
+      }
+    } catch (e) {
+      emit(HotProductErrorState());
+      log("Exception: $e");
+    }
+  }
+
+  Future<void> getbestSeller() async {
+    emit(BestSellerLoadingState());
+    try {
+      final response = await DioHelper.getData(url: EndPoints.home);
+      log(response.data.toString());
+      if (response.statusCode == 200) {
+        final homeModel = HomeModel.fromJson(response.data);
+        bestSellingProd = homeModel.data?.bestSellingProd ?? [];
+        emit(BestSellerSuccessState());
+      } else {
+        emit(BestSellerErrorState());
+        log("Error: ${response.statusCode} - ${response.statusMessage}");
+        log(response.data.toString());
+      }
+    } catch (e) {
+      emit(BestSellerErrorState());
+      log("Exception: $e");
     }
   }
 }
