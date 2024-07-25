@@ -9,13 +9,14 @@ class CustomElvButton extends StatelessWidget {
     required this.text,
     required this.width,
     this.height,
-    this.child,
+    this.child, this.shape,
   });
   final Function() onPressed;
   final String text;
   final double width;
   final double? height;
   final Widget? child;
+  final ShapeBorder? shape;
 
   @override
   Widget build(BuildContext context) {

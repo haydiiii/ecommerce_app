@@ -18,8 +18,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   final List<Widget> screens = [
     const HomeView(),
-    ProductView(
-    ),
+    const ProductView(),
     const CategoryView(),
     const StoreView(),
     const ProfileView(),

@@ -14,3 +14,8 @@ pushAndRemoveUntil(context, Widget newView) {
       MaterialPageRoute(builder: (context) => newView),
       (Route<dynamic> route) => false);
 }
+pop(context) {
+  Navigator.of(context).pop(
+    context
+      );
+}

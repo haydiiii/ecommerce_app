@@ -1,10 +1,9 @@
 import 'package:ecommerce_app/core/constants/images/icon_assets.dart';
 import 'package:ecommerce_app/core/functions/routing.dart';
-import 'package:ecommerce_app/core/services/dio_helper/cash_helper.dart';
+import 'package:ecommerce_app/core/services/dio_helper/token.dart';
 import 'package:ecommerce_app/core/utils/colors.dart';
 import 'package:ecommerce_app/core/utils/text_style.dart';
-import 'package:ecommerce_app/features/auth/presentation/login/view/login_view.dart';
-import 'package:ecommerce_app/features/home/presentation/view/home_view.dart';
+import 'package:ecommerce_app/features/layouts/presentation/view/bottom_nav_bar.dart';
 import 'package:ecommerce_app/features/onBoarding/presentation/view/onboard_vie.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -18,26 +17,30 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
-  Widget? nextScreen;
+  //Widget? nextScreen;
 
   @override
   void initState() {
     //bool isUpload = AppLocalStorage.getCashData('isUploaded') ?? false;
     super.initState();
-    bool? onBoard = CashHelper.getData('onBoard');
-    String? token = CashHelper.getData('token');
-    if (onBoard != null) {
-      if (token != null) {
-        nextScreen = const HomeView();
-      } else {
-        nextScreen = const LoginView();
-      }
-    } else {
-      nextScreen = const OnBoardView();
-    }
+    // bool? onBoard = CashHelper.getData('onBoard');
+    // String? token = CashHelper.getData('token');
+    // if (onBoard != null) {
+    //   if (token != null) {
+    //     nextScreen = const HomeView();
+    //   } else {
+    //     nextScreen = const LoginView();
+    //   }
+    // } else {
+    //   nextScreen = const OnBoardView();
+    // }
 
     Future.delayed(const Duration(seconds: 4), () {
-      pushAndRemoveUntil(context, nextScreen!);
+      pushAndRemoveUntil(
+          context,
+          Token.getBearerToken() == null || Token.getBearerToken() == ''
+              ? const OnBoardView()
+              : const BottomNavBar());
     });
   }
 

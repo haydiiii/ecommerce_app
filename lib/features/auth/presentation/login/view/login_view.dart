@@ -4,6 +4,7 @@ import 'package:ecommerce_app/core/utils/text_style.dart';
 import 'package:ecommerce_app/core/widgets/custm_txtform_field.dart';
 import 'package:ecommerce_app/core/widgets/custom_dialog.dart';
 import 'package:ecommerce_app/core/widgets/custom_elev_button.dart';
+import 'package:ecommerce_app/features/auth/presentation/forgetpassword/view/forget_password.dart';
 import 'package:ecommerce_app/features/auth/presentation/login/view_model/login_cubit.dart';
 import 'package:ecommerce_app/features/auth/presentation/login/view_model/login_states.dart';
 import 'package:ecommerce_app/features/auth/presentation/register/view/sign_up_view.dart';
@@ -143,6 +144,21 @@ class _LoginViewState extends State<LoginView> {
                                 }
                                 return null;
                               },
+                            ),
+                            const Gap(30),
+                            InkWell(
+                              onTap: () {
+                                pushto(context, ForgetPasswordView());
+                              },
+                              child: Container(
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  'Forget Password?',
+                                  style: getBodyStyle(
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.primaryColor),
+                                ),
+                              ),
                             ),
                             const Gap(10),
                             CustomElvButton(
