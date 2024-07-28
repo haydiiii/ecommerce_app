@@ -34,6 +34,7 @@ class CategoryWidget extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: cubit.allCategories.length,
               itemBuilder: (context, index) {
+                final category = cubit.allCategories[index];
                 return Padding(
                   padding: const EdgeInsets.all(5),
                   child: InkWell(
@@ -41,8 +42,8 @@ class CategoryWidget extends StatelessWidget {
                       pushto(
                         context,
                         CategoryProductsScreen(
-                          categoryName: cubit.allCategories[index].name,
-                          id: cubit.allCategories[index].id,
+                          categoryName: category.name,
+                          id: category.id,
                         ),
                       );
                     },
@@ -50,14 +51,20 @@ class CategoryWidget extends StatelessWidget {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Opacity(
-                            opacity: 0.8,
-                            child: Image.network(
-                              cubit.allCategories[index].imageUrl,
-                              fit: BoxFit.cover,
-                              height: 100,
-                              width: 100,
-                            ),
+                          child: Image.network(
+                            category.imageUrl,
+                            fit: BoxFit.cover,
+                            height: 100,
+                            width: 100,
+                            errorBuilder: (context, error, stackTrace) {
+                              print('Failed to load image: ${category.imageUrl}'); // Log the URL
+                              return Image.asset(
+                                'assets/images/placeholder.png',
+                                fit: BoxFit.cover,
+                                height: 100,
+                                width: 100,
+                              );
+                            },
                           ),
                         ),
                         Container(
@@ -66,10 +73,9 @@ class CategoryWidget extends StatelessWidget {
                               horizontal: 10, vertical: 10),
                           child: Center(
                             child: Text(
-                              cubit.allCategories[index].name,
+                              category.name,
                               overflow: TextOverflow.ellipsis,
-                              maxLines:
-                                  2, // Allow the text to wrap to two lines
+                              maxLines: 2, // Allow the text to wrap to two lines
                               textAlign: TextAlign.center,
                               style: getBodyStyle(
                                 color: AppColors.white,

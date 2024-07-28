@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ecommerce_app/features/home/presentation/view_model/home_cubit.dart';
 import 'package:ecommerce_app/features/home/presentation/view_model/home_states.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +22,8 @@ class CategoryProductsScreen extends StatelessWidget {
         title: Text(categoryName),
       ),
       body: BlocProvider(
-        create: (context) => HomeCubit()..getProductByCategory(url: '$id'),
+        create: (context) =>
+            HomeCubit()..getProductByCategory( id: id),
         child: BlocBuilder<HomeCubit, HomeStates>(
           builder: (context, state) {
             var cubit = HomeCubit.get(context);
@@ -56,13 +59,30 @@ class CategoryProductsScreen extends StatelessWidget {
                             child: ClipRRect(
                               borderRadius: const BorderRadius.vertical(
                                   top: Radius.circular(10)),
-                              child: Image.network(
-                                product.imageUrl,
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                              ),
-                            ),
-                          ),
+                              child:
+                              Image.network(
+  product.imageUrl,
+  fit: BoxFit.cover,
+  height: 100,
+  width: 100,
+  errorBuilder: (context, error, stackTrace) {
+    log('Failed to load image: ${product.imageUrl}'); // Log the URL
+    return Image.asset(
+      'assets/carousal.png',
+      fit: BoxFit.cover,
+      height: 100,
+      width: 100,);},))),
+    
+  
+
+
+                              //  Image.network(
+                              //   product.imageUrl,
+                              //   fit: BoxFit.cover,
+                              //   width: double.infinity,
+                              // ),
+                            
+                          
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Column(

@@ -6,7 +6,6 @@ import 'package:ecommerce_app/features/home/presentation/models/home_model.dart'
 import 'package:ecommerce_app/features/home/presentation/models/product_model.dart';
 import 'package:ecommerce_app/features/home/presentation/view_model/home_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_local_notifications_support/flutter_local_notifications.dart';
 
 class HomeCubit extends Cubit<HomeStates> {
   HomeCubit() : super(HomeInitialState());
@@ -42,17 +41,46 @@ class HomeCubit extends Cubit<HomeStates> {
     }
   }
 
-  Future<void> getProductByCategory({required String url}) async {
+//   Future<void> getProductByCategory({required int id}) async {
+//     emit(ProductByCateryLoadingState());
+//     try {
+//       final response =
+// await DioHelper.getData(url: '${EndPoints.productsByCategory}/$id');
+//       log(response.data.toString());
+//       if (response.statusCode == 200) {
+//         final List<dynamic> productData = response.data['data']['data'];
+//         productByCategory =
+//             productData.map((json) => Product.fromJson(json)).toList();
+//         emit(ProductByCaterySuccessState());
+//       }else if (response.statusCode == 404) {
+//   log("Resource not found: ${response.data}");
+//   emit(HomeErrorState());
+// }
+
+//        else {
+//         emit(ProductByCateryErrorState(response.data.toString()));
+//         log("Error: ${response.statusCode} - ${response.statusMessage}");
+//         log(response.data.toString());
+//       }
+//     } catch (e) {
+//       emit(ProductByCateryErrorState(e.toString()));
+//       log("Exception: $e");
+//     }
+//   }
+  Future<void> getProductByCategory({required int id}) async {
     emit(ProductByCateryLoadingState());
     try {
       final response =
-          await DioHelper.getData(url: '${EndPoints.products}/$url');
+          await DioHelper.getData(url: '${EndPoints.productsByCategory}/$id');
       log(response.data.toString());
       if (response.statusCode == 200) {
         final List<dynamic> productData = response.data['data']['data'];
         productByCategory =
             productData.map((json) => Product.fromJson(json)).toList();
         emit(ProductByCaterySuccessState());
+      } else if (response.statusCode == 404) {
+        log("Resource not found: ${response.data}");
+        emit(ProductByCateryErrorState("Resource not found"));
       } else {
         emit(ProductByCateryErrorState(response.data.toString()));
         log("Error: ${response.statusCode} - ${response.statusMessage}");
