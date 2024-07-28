@@ -3,7 +3,7 @@ import 'package:ecommerce_app/core/utils/text_style.dart';
 import 'package:ecommerce_app/features/home/presentation/view_model/home_cubit.dart';
 import 'package:ecommerce_app/features/home/presentation/widgets/best_seller_widget.dart';
 import 'package:ecommerce_app/features/home/presentation/widgets/carousal_slider_wid.dart';
-import 'package:ecommerce_app/features/home/presentation/widgets/category_widget.dart';
+import 'package:ecommerce_app/features/home/presentation/widgets/all_categories_widget.dart';
 import 'package:ecommerce_app/features/home/presentation/widgets/hot_product_widget.dart';
 import 'package:ecommerce_app/features/home/presentation/widgets/new_product_widget.dart';
 import 'package:ecommerce_app/features/home/presentation/widgets/top_product.dart';
@@ -22,7 +22,9 @@ class HomeView extends StatelessWidget {
           ..getAllCategories()
           ..getCarousel()
           ..getNewProducts()
-          ..getbestSeller()..getTopProducts()..getHproducts();
+          ..getbestSeller()
+          ..getTopProducts()
+          ..getHproducts();
       },
       child: SafeArea(
         child: Scaffold(

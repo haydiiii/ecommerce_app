@@ -31,3 +31,16 @@ class BestSellerLoadingState extends HomeStates {}
 class BestSellerSuccessState extends HomeStates {}
 
 class BestSellerErrorState extends HomeStates {}
+
+
+
+
+class ProductByCateryLoadingState extends HomeStates {}
+
+class ProductByCaterySuccessState extends HomeStates {}
+
+class ProductByCateryErrorState extends HomeStates {
+  final String message;
+  ProductByCateryErrorState(this.message);
+}
+

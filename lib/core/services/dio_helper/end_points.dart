@@ -14,6 +14,8 @@ class EndPoints {
 
 
   static String home = 'home';
+  static String allCategories = 'globals/categories';
   static String products = 'products';
+
 }
 //https://grackle-notable-hardly.ngrok-free.app/api/login/

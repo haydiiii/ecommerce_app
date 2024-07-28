@@ -55,7 +55,10 @@ class ForgetPasswordView extends StatelessWidget {
                       Text(
                         'Enter your email',
                         //textAlign: TextAlign.start,
-                        style: getTitleStyle(),
+                        style: getBodyStyle(
+                            fontsize: 20,
+                            fontWeight: FontWeight.w900,
+                            color: AppColors.primaryColor),
                       ),
                       const Gap(15),
                       TextFormField(
