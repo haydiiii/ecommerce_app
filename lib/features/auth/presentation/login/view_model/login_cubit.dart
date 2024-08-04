@@ -32,9 +32,11 @@ class LoginCubit extends Cubit<LoginStates> {
       if (value.data != null && value.data['data'] != null) {
         // Store the token
         Token.cacheBearerToken(token: value.data["data"]["token"]);
-        CashHelper.cacheData("image", value.data["data"]["image"]);
+        CashHelper.cacheData("image_url", value.data["data"]["image_url"]);
         CashHelper.cacheData("email", value.data["data"]["email"]);
-        CashHelper.cacheData("fierst_name", value.data["data"]["first_name"]);
+        CashHelper.cacheData("first_name", value.data["data"]["first_name"]);
+        CashHelper.cacheData("first_name", value.data["data"]["first_name"]);
+        CashHelper.cacheData("last_name", value.data["data"]["last_name"]);
         log(value.data['data']['token']);
         emit(LoginSuccessState());
       } else {

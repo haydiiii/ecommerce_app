@@ -70,8 +70,8 @@ class HomeCubit extends Cubit<HomeStates> {
   Future<void> getProductByCategory({required int id}) async {
     emit(ProductByCateryLoadingState());
     try {
-      final response =
-          await DioHelper.getData(url: '${EndPoints.productsByCategory}/$id');
+      final response = await DioHelper.getData(
+          url: '${EndPoints.productsByCategory}?category_id=$id');
       log(response.data.toString());
       if (response.statusCode == 200) {
         final List<dynamic> productData = response.data['data']['data'];

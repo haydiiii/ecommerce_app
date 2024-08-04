@@ -22,4 +22,8 @@ class CashHelper {
   static dynamic getData(key) {
    return pref!.get(key);
   }
+  static Future <void> removeData({required String key}) async {
+    await pref!.remove(key);
+  }
 }
+

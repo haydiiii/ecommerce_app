@@ -40,7 +40,7 @@ class Product {
       rating: json['rating'],
       type: json['type'],
       status: json['status'],
-      imageUrl: json['image_url'],
+      imageUrl: json['image'],
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:ecommerce_app/core/services/dio_helper/dio_helper.dart';
 import 'package:ecommerce_app/core/services/dio_helper/end_points.dart';
 import 'package:ecommerce_app/features/auth/presentation/forgetpassword/view_model/cubit/forget_state.dart';
@@ -15,7 +16,7 @@ class ForgetCubit extends Cubit<ForgetState> {
   final emailForgetPassword = TextEditingController();
   final verifyCode = TextEditingController();
 
-  forgetPassword()async {
+  forgetPassword() async {
     emit(ForgetPasswordLoadingState());
     await DioHelper.postData(url: EndPoints.forgetPassword, data: {
       'email': emailForgetPassword.text,
@@ -28,14 +29,11 @@ class ForgetCubit extends Cubit<ForgetState> {
     });
   }
 
-  verifyCodeMethod()async {
+  verifyCodeMethod() async {
     emit(VerifyCodeLoadingState());
 
     // Validate the verification code
-    int? otp;
-    try {
-      otp = int.parse(verifyCode.text);
-    } catch (e) {
+    try {} catch (e) {
       emit(VerifyCodeErrorState(
           error: 'Invalid code format. Please enter a valid number.'));
       return;
@@ -47,19 +45,19 @@ class ForgetCubit extends Cubit<ForgetState> {
       return;
     }
 
-     await DioHelper.postData(url: EndPoints.verifyemail, data: {
+    await DioHelper.postData(url: EndPoints.verifyemail, data: {
       "email": emailForgetPassword.text,
-      'otp': otp, // Correct field name for the verification code
+      'otp': verifyCode.text, // Correct field name for the verification code
       //'email': emailForgetPassword.text, // Add the email field here
     }).then((value) {
       log('Server Response: ${value.data}');
-      if (value.data['status'] == 'success') {
+      if (value.data['success'] as bool == true) {
         emit(VerifyCodeSucessState());
       } else {
         emit(VerifyCodeErrorState(error: 'The code is not correct'));
       }
     }).catchError((onError) {
-      if (onError) {
+      if (onError is DioException) {
         log('DioError: ${onError.response?.data}');
         emit(VerifyCodeErrorState(
             error: 'The code is not correct: ${onError.response?.data}'));

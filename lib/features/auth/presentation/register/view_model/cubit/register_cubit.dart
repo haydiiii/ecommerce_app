@@ -28,7 +28,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       (value) {
         if (value.data != null && value.data['data'] != null) {
           Token.cacheBearerToken(token: value.data["data"]["token"]);
-          CashHelper.cacheData("image", value.data["data"]["image"]);
+          CashHelper.cacheData("image_url", value.data["data"]["image_url"]);
           CashHelper.cacheData("email", value.data["data"]["email"]);
           CashHelper.cacheData("fierst_name", value.data["data"]["first_name"]);
           log(value.data['data']['token']);

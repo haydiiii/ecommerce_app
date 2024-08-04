@@ -1,13 +1,9 @@
 import 'package:ecommerce_app/core/utils/colors.dart';
 import 'package:ecommerce_app/core/utils/text_style.dart';
-import 'package:ecommerce_app/features/products/presentation/view_model/cubit/product_cubit.dart';
-import 'package:ecommerce_app/features/products/presentation/view_model/cubit/product_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 
-class ProductView extends StatelessWidget {
-  const ProductView({super.key});
+class CartView extends StatelessWidget {
+  const CartView({super.key});
 
   @override
   Widget build(BuildContext context) {

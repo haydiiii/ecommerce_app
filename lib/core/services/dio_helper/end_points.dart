@@ -13,7 +13,8 @@ class EndPoints {
   static String home = 'home';
   static String allCategories = 'globals/categories';
   static String productsByCategory = 'products';
-
+  static String showProfile = 'profile';
+  static String updateProfile = 'profile/update';
 }
 //  https://ecommerce-api.ammarelgendy.com/api/v1/products
 

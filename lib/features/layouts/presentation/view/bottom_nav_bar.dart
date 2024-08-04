@@ -7,20 +7,22 @@ import 'package:ecommerce_app/features/cart/presentation/view/store_view.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+  const BottomNavBar({super.key, this.index});
+  final int? index;
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
+  
   int currentIndex = 0;
 
   final List<Widget> screens = [
     const HomeView(),
-    const ProductView(),
+    const CartView(),
     const CategoryView(),
-    const StoreView(),
+    const FavouriteView(),
     const ProfileView(),
   ];
 
@@ -45,19 +47,19 @@ class _BottomNavBarState extends State<BottomNavBar> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.production_quantity_limits_outlined),
-            activeIcon: Icon(Icons.production_quantity_limits_rounded),
-            label: 'Products',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.category_outlined),
             activeIcon: Icon(Icons.category_rounded),
             label: 'Category',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.store_outlined),
-            activeIcon: Icon(Icons.store_rounded),
-            label: 'Store',
+            icon: Icon(Icons.shopping_cart_outlined),
+            activeIcon: Icon(Icons.shopping_cart_rounded),
+            label: 'Cart',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_outline),
+            activeIcon: Icon(Icons.favorite_border_rounded),
+            label: 'Favourite',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_2_outlined),

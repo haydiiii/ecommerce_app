@@ -47,7 +47,7 @@ class VerifyCodeView extends StatelessWidget {
               pushAndRemoveUntil(
                 context,
                 ResetPasswordView(
-                  verify_code: verify_code!,
+                  verify_code: verify_code??'',
                 ),
               );
             }

@@ -10,7 +10,11 @@ class Token {
     userToken!.setString('token', token);
   }
 
-static String? getBearerToken (){
-  return userToken!.getString('token');
-}
+  static String? getBearerToken() {
+    return userToken!.getString('token');
+  }
+
+  static  removeBearerToken() {
+    return userToken!.remove('token');
+  }
 }
