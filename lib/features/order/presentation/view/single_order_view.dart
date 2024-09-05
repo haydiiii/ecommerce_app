@@ -9,7 +9,7 @@ import 'package:gap/gap.dart';
 
 // ignore: must_be_immutable
 class SingelOrderView extends StatelessWidget {
-  SingelOrderView({super.key, required this.id});
+  const SingelOrderView({super.key, required this.id});
   final int id;
 
   @override
@@ -18,7 +18,10 @@ class SingelOrderView extends StatelessWidget {
       create: (context) => OrderCubit()..singleOrder(id),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Single Order'),
+          title: Text(
+            'Single Order',
+            style: getTitleStyle(fontsize: 25, fontWeight: FontWeight.w500),
+          ),
         ),
         body: BlocBuilder<OrderCubit, OrderState>(
           builder: (context, state) {
@@ -34,7 +37,6 @@ class SingelOrderView extends StatelessWidget {
               return Center(child: Text('Error: ${state.error}'));
             }
 
-            // Display order details if data is loaded successfully
             if (singleOrderCubit.singleOrderModel != null) {
               var orderData = singleOrderCubit.singleOrderModel!.data;
 
@@ -48,21 +50,21 @@ class SingelOrderView extends StatelessWidget {
                       icon: Icons.info,
                       text: orderData.status,
                     ),
-                    const Gap(20),
+                    const Gap(10),
                     SingleOrderItem(
                       title: 'Address',
                       icon: Icons.location_on,
                       text:
                           '${orderData.address.firstName} ${orderData.address.lastName}, ${orderData.address.address}, ${orderData.address.country}',
                     ),
-                    const Gap(20),
+                    const Gap(10),
                     Text('Order Items:',
                         style: getTitleStyle(fontWeight: FontWeight.bold)),
                     const Gap(10),
                     ...orderData.orderItems.map((item) {
                       return OrderItemWidget(item: item);
-                    }).toList(),
-                    const Gap(20),
+                    }),
+                    const Gap(10),
                     Row(
                       children: [
                         Text('Total Price: ',
@@ -72,8 +74,6 @@ class SingelOrderView extends StatelessWidget {
                                 getTitleStyle(color: AppColors.primaryColor)),
                       ],
                     ),
-                    const Gap(20),
-                    const Divider(),
                   ],
                 ),
               );

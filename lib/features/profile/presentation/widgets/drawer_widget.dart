@@ -3,7 +3,6 @@ import 'package:ecommerce_app/core/services/dio_helper/cash_helper.dart';
 import 'package:ecommerce_app/core/utils/colors.dart';
 import 'package:ecommerce_app/core/utils/text_style.dart';
 import 'package:ecommerce_app/features/auth/presentation/login/view/login_view.dart';
-import 'package:ecommerce_app/features/order/presentation/view/single_order_view.dart';
 import 'package:ecommerce_app/features/order/presentation/view/user_order_view.dart';
 import 'package:ecommerce_app/features/profile/presentation/model/show_profile_model.dart';
 import 'package:ecommerce_app/features/profile/presentation/view/update_profile.dart';
