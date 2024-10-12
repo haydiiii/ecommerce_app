@@ -39,7 +39,7 @@ class FavouriteCubit extends Cubit<FavouriteState> {
             url: '${EndPoints.addFavourite}/$id', token: Token.getBearerToken())
         .then((value) {
       favoriteProductIds.add(id);
-      showCustomDialog(context, message: 'Added to Favourite successfully');
+      showCustomDialog(BuildContext, message: 'Added to Favourite successfully');
       emit(AddFavouriteSuccessStates());
       emit(FavouriteUserSuccessStates()); // لإعادة بناء الواجهة
     }).catchError((onError) {

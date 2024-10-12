@@ -30,7 +30,7 @@ class OrderView extends StatelessWidget {
               if (state is OrderSuccessState) {
                 showCustomDialog(context, message: 'Order successfully');
                 Future.delayed(const Duration(seconds: 5), () {
-                  pushAndRemoveUntil(context, const BottomNavBar());
+                  pushAndRemoveUntil(BuildContext, const BottomNavBar());
                 });
               } else if (state is OrderLoadingState) {
                 showLoadingDialog(context);

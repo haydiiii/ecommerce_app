@@ -41,7 +41,7 @@ class CartCubit extends Cubit<CartState> {
       data: {'quantity': quantity},
     ).then((value) {
       itemId = CartModel.fromJson(value.data);
-      showCustomDialog(context, message: 'Added to cart successfully');
+      showCustomDialog(BuildContext, message: 'Added to cart successfully');
       emit(AddProductToCartSuccessState());
     }).catchError((onError) {
       emit(AddProductToCartErrorState());

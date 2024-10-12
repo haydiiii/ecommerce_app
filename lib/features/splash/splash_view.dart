@@ -38,7 +38,7 @@ class _SplashViewState extends State<SplashView> {
 
     Future.delayed(const Duration(seconds: 4), () {
       pushAndRemoveUntil(
-          context,
+          BuildContext,
           Token.getBearerToken() == null || Token.getBearerToken() == ''
               ? const OnBoardView()
               : const BottomNavBar());

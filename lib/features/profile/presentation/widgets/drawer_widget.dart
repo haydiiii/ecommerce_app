@@ -102,7 +102,7 @@ class DrawerWidget extends StatelessWidget {
                       ),
                       onTap: () async {
                         await CashHelper.removeData(key: 'token').then((value) {
-                          pushAndRemoveUntil(context, const LoginView());
+                          pushAndRemoveUntil(BuildContext, const LoginView());
                         });
                       },
                     ),
